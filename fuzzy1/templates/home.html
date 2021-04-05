@@ -1,0 +1,88 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>fuzzy logic</title>
+    <script type="text/javascript" src="{% static './js/tables.js' %}"></script>
+</head>
+<body>
+<h1> <center>Invoice Generator</center></h1>
+<form action="/action_page.php">
+        <div class="container">
+            <h1>
+                <center>GENESIS</center>
+            </h1>
+
+            <hr>
+
+            <label for="college_name"><b>College Name</b></label>
+            <select name="college_name" id="college">
+                <option value="" disabled selected>Select College</option>
+                <option value="SJBIT">SJBIT</option>
+                <option value="JSS">JSS</option>
+                <option value="Ramaiah Institute">Ramaiah Institute</option>
+                <option value="Sapthagiri College">Sapthagiri College</option>
+                <option value="Maharaja College">Maharaja College</option>
+                <option value="K J Sowmya College">K J Sowmya College</option>
+                <option value="S P Jain College">S P Jain College</option>
+                <option value="SBBR Mahajana College">SBBR Mahajana College</option>
+                <option value="Sharada Vilas College">Sharada Vilas College</option>
+            </select>
+            <br>
+            <br>
+            <label for="Trainer"><b>Trainer</b></label>
+            <select name="Trainer name" id="tname">
+                 <option value="" disabled selected>Select Trainer</option>
+                <option value="Aman">Aman</option>
+                <option value="Kanak">Kanak</option>
+                <option value="Suraj">Suraj</option>
+                <option value="Sacchu">Sacchu</option>
+                <option value="Nisha">Nisha</option>
+
+            </select>
+
+            <br>
+            <br>
+            <label for="college_location"><b>College Location</b></label>
+            <input type="text" placeholder="Enter Email" name="email" id="email" required>
+            <br>
+            <br>
+            <label for="trainer_name"><b>Trainer Name</b></label>
+            <input type="text" placeholder="Enter Email" name="email" id="email" required>
+            <br>
+            <br>
+            <label for="domain"><b>Domain</b></label>
+            <input type="text" placeholder="Enter Email" name="email" id="email" required>
+            <br>
+            <br>
+            <label for="start_date"><b>Start Date</b></label>
+            <input type="date" placeholder="Enter Email" name="email" id="email" required>
+            <br>
+            <br>
+            <label for="end_date"><b>End Date</b></label>
+            <input type="date" placeholder="Enter Email" name="email" id="email" required>
+            <br>
+            <br>
+            <table id="myTable">
+                <tr>
+                    <td><input type="date" name="date0" id = "date0"></td>
+                    <td><input type="text" name="fees0" id = "fees0"></td>
+                    <td><input type="text" name="travel0" id = "travel0"></td>
+                    <td><input type="text" name="food0" id = "food0"></td>
+
+
+                    <td><input type="button" class="button" value="Add another line" onclick="addField();"></td>
+                    <td><input type="text" name="copy_no" id="copy" value="1"></td>
+                </tr>
+            </table>
+
+
+            <button type="submit" class="registerbtn">Register</button>
+        </div>
+
+
+    </form>
+</body>
+</html>
