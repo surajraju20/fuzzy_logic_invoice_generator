@@ -1,5 +1,3 @@
-alert("Hello, Welcome to Javatpoint");
-
 function addField(argument) {
 
     var i;
