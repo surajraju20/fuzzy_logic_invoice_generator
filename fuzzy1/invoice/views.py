@@ -36,12 +36,16 @@ def generate(request):
         sdate = datetime.strptime(start_date, '%Y-%m-%d')
         no = edate - sdate
         no_days = no.days
-        travel = int(request.POST['travel0'])
-        food = int(request.POST['food0'])
 
-        email_generator(request, trainer_name, remuneration, college_name, acc_no,
-                        ifsc, pan, phone, email, location, no_days, sdate, edate,
-                        start_date, end_date, travel, food)
+        data_table = [[request.POST['date0'], college_name, int(request.POST['fees0']), int(request.POST['travel0']), int(request.POST['food0'])]]
+
+        number_of_rows = int(request.POST['count'])
+        for i in range(1, no_days):
+            data_table.append([request.POST['date'+str(i)], college_name, int(request.POST['fees'+str(i)]), int(request.POST['travel'+str(i)]), int(request.POST['food'+str(i)])])
+
+        email_generator(trainer_name, remuneration, college_name, acc_no,
+                        ifsc, pan, phone, email, location,
+                        start_date, end_date, data_table)
 
         return HttpResponse("Invoice has been sent to your email")
 
@@ -50,9 +54,9 @@ def generate(request):
         return HttpResponse("no get request allowed")
 
 
-def email_generator(request, trainer_name, remuneration, college_name, acc_no,
-                    ifsc, pan, phone, email, location, no_days, sdate, edate, start_date,
-                    end_date, travel, food):
+def email_generator(trainer_name, remuneration, college_name, acc_no,
+                    ifsc, pan, phone, email, location, start_date,
+                    end_date, data_table):
     # set up the SMTP server
     s = SMTP(host='smtp.gmail.com', port=587)
     s.starttls()
@@ -68,9 +72,8 @@ def email_generator(request, trainer_name, remuneration, college_name, acc_no,
               "Remuneration\t\t  :" + remuneration + "/- per day incl of TDS\n" \
               "Date\t\t\t\t   :" + start_date + " to " + end_date
 
-    pdf_generator(request, trainer_name, remuneration, college_name, acc_no,
-                  ifsc, pan, phone, email, location, no_days, sdate, edate,
-                  start_date, end_date, travel, food)
+    pdf_generator(trainer_name, acc_no,
+                  ifsc, pan, phone, email, location, data_table)
 
     msg['From'] = "namanprakash5@gmail.com"
     msg['To'] = email
@@ -82,15 +85,15 @@ def email_generator(request, trainer_name, remuneration, college_name, acc_no,
     msg.attach(attach)
     msg.attach(MIMEText(message, 'plain'))
 
-    # s.send_message(msg)
+    s.send_message(msg)
     del msg
 
 
-def pdf_generator(request, name1, remuneration, college, dbacno, dbifsc, dbpan, dbphno, dbemail, dbloc, nodays,
-                  sdate, edate, startdate, enddate, Travel, Food):
+def pdf_generator(name1, dbacno, dbifsc, dbpan, dbphno, dbemail, dbloc, data_table):
+    print(data_table)
     pdf = FPDF()
     pdf.add_page()
-    pdf.set_font('Arial', 'B', 18)
+    pdf.set_font('Arial', 'B', 20)
     pdf.cell(200, 10, 'Genesis Invoice Generation', ln=1, align='C')
     pdf.set_font('Arial', 'B', 12)
     pdf.cell(40, 10, 'Name (As per bank account): ' + str(name1), ln=4)
@@ -103,39 +106,32 @@ def pdf_generator(request, name1, remuneration, college, dbacno, dbifsc, dbpan, 
     pdf.cell(40, 10, '', ln=11)
 
     spacing = 1
-    dates = []
-    for i in range(nodays):
-        s = datetime.strptime(startdate, '%Y-%m-%d')
-        s = s + timedelta(i)
-        dates.insert(i, str(s.date()))
-
-    data = [['Date', 'College', 'Fees/day', 'Travel Allowance', 'Food Allowance']]
-    for j in range(nodays):
-        if j == 0 or j == nodays:
-            data.insert(j + 1, [dates[j], college, remuneration, str(Travel), str(Food)])
-        else:
-            data.insert(j + 1, [dates[j], college, remuneration, '0', str(Food)])
+    data_table.insert(0, ['Date', 'College', 'Fees/day', 'Travel Allowance', 'Food Allowance'])
 
     col_width = pdf.w / 5.7
     row_height = pdf.font_size * 1.8
-    for row in data:
+    for row in data_table:
         for item in row:
-            pdf.cell(col_width, row_height * spacing, txt=item, border=1, align="C")
+            pdf.cell(col_width, row_height * spacing, txt=str(item), border=1, align="C")
         pdf.ln(row_height * spacing)
 
-    Ren = int(remuneration) * int(nodays)
-    Travel = int(Travel) * 2
-    Food = int(Food) * int(nodays)
-    Grand = int(Ren) + int(Travel) + int(Food)
+    ren = 0
+    travel = 0
+    food = 0
+    for i in data_table[1:]:
+        ren += i[2]
+        travel += i[3]
+        food += i[4]
+    grand = ren + travel + food
 
     pdf.cell(col_width * 2, row_height * spacing, txt="Total", border=1, align="C")
-    pdf.cell(col_width, row_height * spacing, txt=str(int(Ren)), border=1, align="C")
-    pdf.cell(col_width, row_height * spacing, txt=str(int(Travel)), border=1, align="C")
-    pdf.cell(col_width, row_height * spacing, txt=str(int(Food)), border=1, align="C")
+    pdf.cell(col_width, row_height * spacing, txt=str(ren), border=1, align="C")
+    pdf.cell(col_width, row_height * spacing, txt=str(travel), border=1, align="C")
+    pdf.cell(col_width, row_height * spacing, txt=str(food), border=1, align="C")
     pdf.ln(row_height * spacing)
     pdf.cell(col_width * 4, row_height * spacing, txt="Grand Total", border=1, align="C")
-    pdf.cell(col_width, row_height * spacing, txt=str(int(Grand)), border=1, align="C")
+    pdf.cell(col_width, row_height * spacing, txt=str(int(grand)), border=1, align="C")
     pdf.ln(row_height * spacing)
-    pdf.cell(col_width * 5, row_height * spacing, txt="Rupees: " + str(int(Grand)), border=1, align="C")
+    pdf.cell(col_width * 5, row_height * spacing, txt="Rupees: " + str(int(grand)), border=1, align="C")
 
     pdf.output("invoice/Invoice.pdf")
