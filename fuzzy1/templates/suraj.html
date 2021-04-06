@@ -1,21 +1,5 @@
-{% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>Contact V1</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="shortcut icon" href="{% static '/images/icon/favicon.ico' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static './styles/main.css' %}">
-    <script type="text/javascript" src="{% static './js/tables.js' %}"></script>
-
-
-</head>
-
-<body>
+{% extends 'base.html' %}
+{% block content %}
 
     <div class="contact1">
         <div class="container-contact1">
@@ -32,8 +16,8 @@
                	 		<option value="" disabled selected>Select College</option>
 						{% for colg in colleges %}
 						<option value="{{colg.c_name}}">{{colg.c_name}}</option>
-
                 	{% endfor %}
+
             </select>
 
                 </div>
@@ -104,11 +88,4 @@
         </div>
     </div>
 
-
-
-
-
-
-</body>
-
-</html>
+{% endblock %}

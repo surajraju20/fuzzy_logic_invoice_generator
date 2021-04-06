@@ -65,13 +65,12 @@ def email_generator(request, trainer_name, remuneration, college_name, acc_no,
               "of our forth coming project on the contractual basis. PFB the details about the project.\n" \
               "\n" \
               "Name of College\t\t:" + college_name + "\n" \
-                                                 "Remuneration\t\t  :" + remuneration + "/- per day incl of TDS\n" \
-                                                                                        "Date\t\t\t\t   :" + start_date + " to " + end_date
+              "Remuneration\t\t  :" + remuneration + "/- per day incl of TDS\n" \
+              "Date\t\t\t\t   :" + start_date + " to " + end_date
 
     pdf_generator(request, trainer_name, remuneration, college_name, acc_no,
                   ifsc, pan, phone, email, location, no_days, sdate, edate,
                   start_date, end_date, travel, food)
-
 
     msg['From'] = "namanprakash5@gmail.com"
     msg['To'] = email
@@ -83,7 +82,7 @@ def email_generator(request, trainer_name, remuneration, college_name, acc_no,
     msg.attach(attach)
     msg.attach(MIMEText(message, 'plain'))
 
-    s.send_message(msg)
+    # s.send_message(msg)
     del msg
 
 
@@ -91,14 +90,14 @@ def pdf_generator(request, name1, remuneration, college, dbacno, dbifsc, dbpan, 
                   sdate, edate, startdate, enddate, Travel, Food):
     pdf = FPDF()
     pdf.add_page()
-    pdf.set_font('Arial', 'B', 12)
+    pdf.set_font('Arial', 'B', 18)
     pdf.cell(200, 10, 'Genesis Invoice Generation', ln=1, align='C')
+    pdf.set_font('Arial', 'B', 12)
     pdf.cell(40, 10, 'Name (As per bank account): ' + str(name1), ln=4)
     pdf.cell(40, 10, 'Bank account number: ' + str(dbacno), ln=5)
     pdf.cell(40, 10, 'IFSC Code: ' + str(dbifsc), ln=6)
     pdf.cell(40, 10, 'Pan Number: ' + str(dbpan), ln=7)
     pdf.cell(40, 10, 'Phone Number: ' + str(dbphno), ln=8)
-    pdf.cell(40, 10, 'Email Id: ' + str(dbemail), ln=9)
     pdf.cell(40, 10, 'Email Id: ' + str(dbemail), ln=9)
     pdf.cell(40, 10, 'Base Location : ' + str(dbloc), ln=10)
     pdf.cell(40, 10, '', ln=11)
@@ -117,8 +116,8 @@ def pdf_generator(request, name1, remuneration, college, dbacno, dbifsc, dbpan, 
         else:
             data.insert(j + 1, [dates[j], college, remuneration, '0', str(Food)])
 
-    col_width = pdf.w / 5.6
-    row_height = pdf.font_size * 2
+    col_width = pdf.w / 5.7
+    row_height = pdf.font_size * 1.8
     for row in data:
         for item in row:
             pdf.cell(col_width, row_height * spacing, txt=item, border=1, align="C")
