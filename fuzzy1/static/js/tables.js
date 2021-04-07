@@ -1,4 +1,3 @@
-alert("Hello, Welcome to Javatpoint");
 
 function addField(argument) {
 
@@ -38,7 +37,7 @@ function addField(argument) {
         addRowBox.setAttribute("type", "button");
         addRowBox.setAttribute("value", "Add another line");
         addRowBox.setAttribute("onclick", "addField();");
-        addRowBox.setAttribute("class", "button");
+        addRowBox.setAttribute("class", "button btn btn-primary");
 
         var currentCell = currentRow.insertCell(-1);
         currentCell.appendChild(dateBox);
@@ -61,3 +60,5 @@ function addField(argument) {
     }
 
 }
+
+

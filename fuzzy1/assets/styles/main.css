@@ -10,9 +10,7 @@ body,
 html {
     height: 100%;
     font-family: Montserrat-Regular, sans-serif;
-
 }
-
 
 
 /*---------------------------------------------*/
@@ -32,7 +30,6 @@ li {
 input {
     outline: none;
     border: none;
-    font-family: 'Kiwi Maru', serif;
 }
 
 
@@ -68,11 +65,11 @@ iframe {
     width: 100%;
     min-height: 100%;
     padding: 15px;
-    background: yellow;
-    background: -webkit-linear-gradient(left, #e0e011, #ffa600);
-    background: -o-linear-gradient(left, #ffa600, #00c6ff);
-    background: -moz-linear-gradient(left, #ecd051b2, #00c6ff);
-    background: linear-gradient(left, #ffa600, #00c6ff);
+    background: #009bff;
+    background: -webkit-linear-gradient(left, #0072ff, #00c6ff);
+    background: -o-linear-gradient(left, #0072ff, #00c6ff);
+    background: -moz-linear-gradient(left, #0072ff, #00c6ff);
+    background: linear-gradient(left, #0072ff, #00c6ff);
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -111,7 +108,6 @@ iframe {
     line-height: 1.2;
     text-align: center;
     padding-bottom: 44px;
-    padding-left : 154px
 }
 
 input.input1 {
@@ -173,7 +169,7 @@ textarea.input1+.shadow-input1 {
     border-radius: 25px;
     background: #57b846;
     font-family: Montserrat-Bold;
-    font-size: 25px;
+    font-size: 15px;
     line-height: 1.5;
     color: #fff;
     display: -webkit-box;
@@ -217,3 +213,4 @@ textarea.input1+.shadow-input1 {
 
 /* Table Styles */
 
+alert("hello");
