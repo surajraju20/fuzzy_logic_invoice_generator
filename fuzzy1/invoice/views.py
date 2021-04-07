@@ -40,7 +40,7 @@ def generate(request):
         data_table = [[request.POST['date0'], college_name, int(request.POST['fees0']), int(request.POST['travel0']), int(request.POST['food0'])]]
 
         number_of_rows = int(request.POST['count'])
-        for i in range(1, no_days):
+        for i in range(1, no_days+1):
             data_table.append([request.POST['date'+str(i)], college_name, int(request.POST['fees'+str(i)]), int(request.POST['travel'+str(i)]), int(request.POST['food'+str(i)])])
 
         email_generator(trainer_name, remuneration, college_name, acc_no,
@@ -51,7 +51,7 @@ def generate(request):
 
     else:
         print("got get")
-        return HttpResponse("no get request allowed")
+        return render(request, "invoice.html")
 
 
 def email_generator(trainer_name, remuneration, college_name, acc_no,

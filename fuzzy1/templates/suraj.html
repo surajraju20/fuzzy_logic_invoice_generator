@@ -1,31 +1,37 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-
-    <div class="contact1">
-        <div class="container-contact1">
+ <div class="container-fluid ">
+        <div class="container-contact1 container-fluid text-center  ">
 
             <form class="contact1-form" name = "contact1-form" id = "contact1-form" action="invoice"  method="POST">
                 {% csrf_token %}
-                <span class="contact1-form-title">
-					Get in touch
+                <div class="text-center container-fluid">
+                <img src="{% static './images/genesis.png' %}" class="img-fluid rounded mx-auto d-block" alt="Genesis" width="150" height="150">
+
+
+                <div>
+                <span class="contact1-form-title fs-1 fw-bold ">
+					<p class="text-center">Fuzzy Logic's Invoice Generator</p>
 				</span>
+                </div>
 
-                <div class="wrap-input1 ">
-                    <select name="college_name" id="college">
+                <div class="wrap-input1 container-fluid">
+                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="college_name" id="college">
 
-               	 		<option value="" disabled selected>Select College</option>
+               	 		<option value="" disabled selected>--Select College--</option>
 						{% for colg in colleges %}
 						<option value="{{colg.c_name}}">{{colg.c_name}}</option>
-                	{% endfor %}
 
+                	{% endfor %}
             </select>
 
                 </div>
 
-                <div class="wrap-input1 " >
-                    <select name="trainer_name" id="trainer">
+                <div class="wrap-input1 container-fluid " >
+                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="trainer_name" id="trainer">
 
-               	 		<option value="" disabled selected>Select Trainers</option>
+               	 		<option value="" disabled selected>--Select Trainers--</option>
 						{% for trainer in trainers %}
 						<option value="{{trainer.t_name}}">{{trainer.t_name}}</option>
 
@@ -34,59 +40,63 @@
             </select>
 
                 </div>
+                <br>
 
-                <div class="wrap-input1">
-                    <p>
-                        Start Date:
-                    </p> <input type="date" name="start_date" id="start_date" required>
-                    <br>
-                    <p>
-                        End Date:
-                    </p> <input type="date" name="end_date" id="end_date" required>
+                <div class="row container-fluid">
+                    <div class="col container-fluid">
+                        <p class="fs-5"> Start Date: <input type="date" name="start_date" id="start_date" required></p>
+                    </div>
+                    <div class="col container-fluid">
+                        <p class="fs-5"> End Date: <input type="date" name="end_date" id="end_date" required></p>
                     <span class="shadow-input1"></span>
+                        </div>
                 </div>
+                <br>
 
 
-                <div class="wrap-input1 ">
-                    <textarea class="input1" name="message" placeholder="Message"></textarea>
-                    <span class="shadow-input1"></span>
-                </div>
 
-                <div class="wrap-input1 ">
-                    <table class="fl-table" id="myTable" >
-                        <thead>
+
+                <div class="container-fluid">
+                    <table class="table table-hover table table-bordered table-sm " id="myTable" >
+                        <thead class="table-light">
                             <tr>
-                                <th>Date</th>
-                                <th>Fees/day</th>
-                                <th>Travel Allowance</th>
-                                <th>Food Allowance</th>
+                                <th style="text-align:center">Date</th>
+                                <th style="text-align:center">Fees/day</th>
+                                <th style="text-align:center">Travel Allowance</th>
+                                <th style="text-align:center">Food Allowance</th>
                             </tr>
                         </thead>
                             <tr>
-                                <td><input type="date" name="date0" id = 'date0' size="5"></td>
-                                <td><input type="number" name="fees0" id = 'fees0' size="5"></td>
-                                <td><input type="number" name="travel0" id = 'travel0' size="5"></td>
-                                <td><input type="number" name="food0" id = 'food0' size="5"></td>
+                                <td ><input type="date" name="date0" id = 'date0' ></td>
+                                <td><input type="text" name="fees0" id = 'fees0' ></td>
+                                <td><input type="text" name="travel0" id = 'travel0'></td>
+                                <td><input type="text" name="food0" id = 'food0' ></td>
 
-                                <td><input type="button" class="button" value="Add another line" onclick="addField();"></td>
+                                <td><input type="button" class="button btn btn-primary" value="Add another line" onclick="addField();"></td>
                                 <td><input type="text" name="copy_no" id="copy" value="1" size="5"></td>
-                                <input type = 'hidden' name="count" id="rowcount" value = 1>
                             </tr>
                     </table>
 
                 </div>
 
+                <br>
 
-                <div class="container-contact1-form-btn">
+                <div class="container-contact1-form-btn container-fluid">
                     <button class="contact1-form-btn">
 						<span>
-							Send Email
+							Send Invoice
 							<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
 						</span>
 					</button>
                 </div>
+                    <input type = 'hidden' name="count" id="rowcount" value = 1>
             </form>
         </div>
     </div>
+
+
+
+
+
 
 {% endblock %}

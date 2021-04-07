@@ -10,7 +10,9 @@ body,
 html {
     height: 100%;
     font-family: Montserrat-Regular, sans-serif;
+
 }
+
 
 
 /*---------------------------------------------*/
@@ -30,6 +32,7 @@ li {
 input {
     outline: none;
     border: none;
+    font-family: 'Kiwi Maru', serif;
 }
 
 
@@ -65,11 +68,11 @@ iframe {
     width: 100%;
     min-height: 100%;
     padding: 15px;
-    background: #009bff;
-    background: -webkit-linear-gradient(left, #0072ff, #00c6ff);
-    background: -o-linear-gradient(left, #0072ff, #00c6ff);
-    background: -moz-linear-gradient(left, #0072ff, #00c6ff);
-    background: linear-gradient(left, #0072ff, #00c6ff);
+    background: yellow;
+    background: -webkit-linear-gradient(left, #e0e011, #ffa600);
+    background: -o-linear-gradient(left, #ffa600, #00c6ff);
+    background: -moz-linear-gradient(left, #ecd051b2, #00c6ff);
+    background: linear-gradient(left, #ffa600, #00c6ff);
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -108,6 +111,7 @@ iframe {
     line-height: 1.2;
     text-align: center;
     padding-bottom: 44px;
+    padding-left : 154px
 }
 
 input.input1 {
@@ -169,7 +173,7 @@ textarea.input1+.shadow-input1 {
     border-radius: 25px;
     background: #57b846;
     font-family: Montserrat-Bold;
-    font-size: 15px;
+    font-size: 25px;
     line-height: 1.5;
     color: #fff;
     display: -webkit-box;
@@ -209,45 +213,3 @@ textarea.input1+.shadow-input1 {
 
 /*------------------------------------------------------------------
 [
-
-
-/* Table Styles */
-
-.fl-table {
-    border-radius: 5px;
-    font-size: 12px;
-    font-weight: normal;
-    border: 2px solid black;
-    border-collapse: collapse;
-    width: 50%;
-    max-width: 50%;
-    white-space: nowrap;
-    background-color: white;
-}
-
-.fl-table td,
-.fl-table th {
-    text-align: center;
-    padding: 8px;
-    border: 1px solid black;
-}
-
-.fl-table td {
-    border: 1px solid black;
-    font-size: 12px;
-}
-
-.fl-table thead th {
-    color: #ffffff;
-    background: #4FC3A1;
-}
-
-.fl-table thead th:nth-child(odd) {
-    color: #ffffff;
-    background: #324960;
-}
-
-.fl-table tr:nth-child(even) {
-    background: #F8F8F8;
-    border: 1px solid black;
-}
