@@ -47,11 +47,11 @@ def generate(request):
                         ifsc, pan, phone, email, location,
                         start_date, end_date, data_table)
 
-        return HttpResponse("Invoice has been sent to your email")
+        return render(request, "invoice.html")
 
     else:
         print("got get")
-        return render(request, "invoice.html")
+        return HttpResponse("no get request allowed")
 
 
 def email_generator(trainer_name, remuneration, college_name, acc_no,
