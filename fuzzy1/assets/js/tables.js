@@ -12,7 +12,10 @@ function addField(argument) {
         dateBox.setAttribute("type", "date");
         console.log(currentIndex);
         var data = document.getElementById("date"+String(currentIndex-1)).value;
-        dateBox.setAttribute("value", data);
+        var got_date = new Date(data)
+        var followingDay = new Date(got_date.getTime() + 86400000);
+        console.log(followingDay)
+        dateBox.setAttribute("value", followingDay);
 
         var feesBox = document.createElement("input");
         feesBox.setAttribute("name", "fees" + currentIndex);

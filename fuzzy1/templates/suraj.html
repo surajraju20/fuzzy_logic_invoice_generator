@@ -1,21 +1,5 @@
-{% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>Contact V1</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="shortcut icon" href="{% static '/images/icon/favicon.ico' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static './styles/main.css' %}">
-    <script type="text/javascript" src="{% static './js/tables.js' %}"></script>
-
-
-</head>
-
-<body>
+{% extends 'base.html' %}
+{% block content %}
 
     <div class="contact1">
         <div class="container-contact1">
@@ -32,8 +16,8 @@
                	 		<option value="" disabled selected>Select College</option>
 						{% for colg in colleges %}
 						<option value="{{colg.c_name}}">{{colg.c_name}}</option>
-
                 	{% endfor %}
+
             </select>
 
                 </div>
@@ -80,12 +64,13 @@
                         </thead>
                             <tr>
                                 <td><input type="date" name="date0" id = 'date0' size="5"></td>
-                                <td><input type="text" name="fees0" id = 'fees0' size="5"></td>
-                                <td><input type="text" name="travel0" id = 'travel0' size="5"></td>
-                                <td><input type="text" name="food0" id = 'food0' size="5"></td>
+                                <td><input type="number" name="fees0" id = 'fees0' size="5"></td>
+                                <td><input type="number" name="travel0" id = 'travel0' size="5"></td>
+                                <td><input type="number" name="food0" id = 'food0' size="5"></td>
 
                                 <td><input type="button" class="button" value="Add another line" onclick="addField();"></td>
                                 <td><input type="text" name="copy_no" id="copy" value="1" size="5"></td>
+                                <input type = 'hidden' name="count" id="rowcount" value = 1>
                             </tr>
                     </table>
 
@@ -104,11 +89,4 @@
         </div>
     </div>
 
-
-
-
-
-
-</body>
-
-</html>
+{% endblock %}
