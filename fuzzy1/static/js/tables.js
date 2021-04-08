@@ -76,3 +76,18 @@ function addField(argument) {
     }
     document.getElementById('rowcount').value = count;
 }
+
+function cal_diff(){
+    var startDate = document.getElementById("start_date").value;
+    var endDate = document.getElementById("end_date").value;
+
+    if ((Date.parse(startDate) >= Date.parse(endDate))) {
+        console.log(Date.parse(startDate))
+        console.log(Date.parse(endDate))
+        alert("End date should be greater than Start date");
+        document.getElementById("end_date").value = "";
+    }
+}
+function set(){
+document.getElementById("end_date").value = "";
+}
