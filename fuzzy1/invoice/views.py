@@ -118,15 +118,16 @@ def pdf_generator(name1, dbacno, dbifsc, dbpan, dbphno, dbemail, dbloc, data_tab
     pdf.add_page()
     header = 'Fuzzy Logic Training Institute'
     pdf.image('./static/images/logo.png', 3, 8, 20)
-    pdf.set_font('Times', 'B', 20)
+    pdf.set_font('Times', 'B', 26)
     w = pdf.get_string_width(header) + 6
     pdf.set_x((210 - w) / 2)
     pdf.set_fill_color(251, 235, 101)
     pdf.cell(w, 9, header, 2, 1, 'L', 1)
-    pdf.line(50, 18, 210 - 50, 18)
+    # pdf.line(50, 18, 210 - 50, 18)
     # pdf.set_font('Arial', 'B', 20)
     # pdf.cell(200, 10, 'Genesis Invoice Generation', ln=1, align='C')
     pdf.set_font('Times', 'B', 12)
+    pdf.ln()
     pdf.ln()
     pdf.cell(40, 10, 'Name (As per bank account): ' + str(name1), ln=4)
     pdf.cell(40, 10, 'Bank account number: ' + str(dbacno), ln=5)
