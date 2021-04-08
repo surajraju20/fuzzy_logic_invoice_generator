@@ -18,3 +18,8 @@ class Trainer(models.Model):
     phone_number = models.BigIntegerField()
     email_id = models.EmailField(max_length=250)
     t_location = models.CharField(max_length=100)
+
+
+class hr_users(models.Model):
+    username = models.CharField(max_length=100)
+    password = models.CharField(max_length=100)

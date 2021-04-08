@@ -49,11 +49,11 @@ function addField(argument) {
         var data = document.getElementById("food"+String(currentIndex-1)).value;
         foodBox.setAttribute("value", data);
 
-        var addRowBox = document.createElement("input");
-        addRowBox.setAttribute("type", "button");
-        addRowBox.setAttribute("value", "Add another line");
-        addRowBox.setAttribute("onclick", "addField();");
-        addRowBox.setAttribute("class", "button btn btn-primary");
+//        var addRowBox = document.createElement("input");
+//        addRowBox.setAttribute("type", "button");
+//        addRowBox.setAttribute("value", "Add another line");
+//        addRowBox.setAttribute("onclick", "addField();");
+////        addRowBox.setAttribute("class", "button btn btn-primary");
 
         var currentCell = currentRow.insertCell(-1);
         currentCell.appendChild(dateBox);
@@ -68,8 +68,8 @@ function addField(argument) {
         currentCell = currentRow.insertCell(-1);
         currentCell.appendChild(foodBox);
 
-        currentCell = currentRow.insertCell(-1);
-        currentCell.appendChild(addRowBox);
+//        currentCell = currentRow.insertCell(-1);
+//        currentCell.appendChild(addRowBox);
 
 
         document.createElement("br");

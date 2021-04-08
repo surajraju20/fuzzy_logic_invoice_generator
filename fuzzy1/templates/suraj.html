@@ -1,102 +1,125 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
- <div class="container-fluid ">
-        <div class="container-contact1 container-fluid text-center  ">
+<div class="container-fluid ">
+    <div class="container-contact1 container-fluid text-center  ">
 
-            <form class="contact1-form" name = "contact1-form" id = "contact1-form" action="invoice"  method="POST">
-                {% csrf_token %}
-                <div class="text-center container-fluid">
-                <img src="{% static './images/genesis.png' %}" class="img-fluid rounded mx-auto d-block" alt="Genesis" width="150" height="150">
+        <form class="contact1-form" name="contact1-form" id="contact1-form" action="invoice" method="POST">
+            {% csrf_token %}
 
-
+            <div class="text-center container-fluid">
+                <img src="{% static './images/genesis.png' %}" class="img-fluid rounded mx-auto d-block " alt="Genesis"
+                     width="150" height="150">
                 <div>
-                <span class="contact1-form-title fs-1 fw-bold ">
-					<p class="text-center">Fuzzy Logic's Invoice Generator</p>
-				</span>
+                    <span class="contact1-form-title fs-1 fw-bold ">
+					    <p class="text-center">Fuzzy Logic's Invoice Generator</p>
+				    </span>
                 </div>
+            </div>
 
-                <div class="wrap-input1 container-fluid">
-                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="college_name" id="college">
+            <div class="wrap-input1 container-fluid">
+                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="college_name"
+                        id="college">
+                    <option value="" disabled selected>--Select College--</option>
+                    {% for colg in colleges %}
+                    <option value="{{colg.c_name}}">{{colg.c_name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
 
-               	 		<option value="" disabled selected>--Select College--</option>
-						{% for colg in colleges %}
-						<option value="{{colg.c_name}}">{{colg.c_name}}</option>
+            <div class="wrap-input1 container-fluid ">
+                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="trainer_name"
+                        id="trainer">
+                    <option value="" disabled selected>--Select Trainers--</option>
+                    {% for trainer in trainers %}
+                    <option value="{{trainer.t_name}}">{{trainer.t_name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
 
-                	{% endfor %}
-            </select>
+            <!--            <div class="wrap-input1 container-fluid ">-->
+            <!--                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="mode" id="mode">-->
+            <!--                    <option value="" disabled selected>&#45;&#45;Select Mode&#45;&#45;</option>-->
+            <!--                    <option value="online">online</option>-->
+            <!--                    <option value="offline">ofline</option>-->
+            <!--                </select>-->
+            <!--            </div>-->
 
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="mode" id="inlineRadio1"
+                       value="online">
+                <label class="form-check-label" for="inlineRadio1"><h5><span class="badge rounded-pill bg-warning text-dark">Online</span></h5></label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="mode" id="inlineRadio2"
+                       value="offline">
+                <label class="form-check-label" for="inlineRadio2"><h5><span class="badge rounded-pill bg-warning text-dark">Offline</span></h5></label>
+            </div>
+            <br>
+            <br>
+            <div class="wrap-input1 container-fluid ">
+                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="timings"
+                        id="timings">
+                    <option value="" disabled selected>--Select Timing--</option>
+                    <option vaue="1st">9:00 am - 11:00 am| 11:30 am - 1:30 pm| 2:00 pm - 4:00 pm</option>
+                    <option vaue="2nd">9:30 am - 11:30 am| 12:00 am - 2:00 pm| 2:30 pm - 4:30 pm</option>
+                    <option vaue="3rd">10:00 am - 12:00 am| 12:30 am - 2:30 pm| 3:00 pm - 5:00 pm</option>
+                </select>
+            </div>
+
+            <br>
+
+            <div class="row container-fluid">
+                <div class="col container-fluid">
+                    <p class="fs-5"> Start Date: <input type="date" name="start_date" id="start_date" required></p>
                 </div>
-
-                <div class="wrap-input1 container-fluid " >
-                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="trainer_name" id="trainer">
-
-               	 		<option value="" disabled selected>--Select Trainers--</option>
-						{% for trainer in trainers %}
-						<option value="{{trainer.t_name}}">{{trainer.t_name}}</option>
-
-                	{% endfor %}
-
-            </select>
-
-                </div>
-                <br>
-
-                <div class="row container-fluid">
-                    <div class="col container-fluid">
-                        <p class="fs-5"> Start Date: <input type="date" name="start_date" id="start_date" required></p>
-                    </div>
-                    <div class="col container-fluid">
-                        <p class="fs-5"> End Date: <input type="date" name="end_date" id="end_date" required></p>
+                <div class="col container-fluid">
+                    <p class="fs-5"> End Date: <input type="date" name="end_date" id="end_date" required></p>
                     <span class="shadow-input1"></span>
-                        </div>
                 </div>
-                <br>
+            </div>
+            <br>
 
 
+            <div class="container-fluid">
+                <table class="table table-hover table table-bordered table-sm " id="myTable">
+                    <thead class="table-light">
+                    <tr>
+                        <th style="text-align:center">Date</th>
+                        <th style="text-align:center">Fees/day</th>
+                        <th style="text-align:center">Travel Allowance</th>
+                        <th style="text-align:center">Food Allowance</th>
+                    </tr>
+                    </thead>
+                    <tr>
+                        <td><input type="date" name="date0" id='date0'></td>
+                        <td><input type="text" name="fees0" id='fees0'></td>
+                        <td><input type="text" name="travel0" id='travel0'></td>
+                        <td><input type="text" name="food0" id='food0'></td>
 
+                        <td><input type="button" class="button btn btn-primary" value="Add another line"
+                                   onclick="addField();"></td>
+                        <td><input type="text" name="copy_no" id="copy" value="1" size="5"></td>
+                    </tr>
+                </table>
 
-                <div class="container-fluid">
-                    <table class="table table-hover table table-bordered table-sm " id="myTable" >
-                        <thead class="table-light">
-                            <tr>
-                                <th style="text-align:center">Date</th>
-                                <th style="text-align:center">Fees/day</th>
-                                <th style="text-align:center">Travel Allowance</th>
-                                <th style="text-align:center">Food Allowance</th>
-                            </tr>
-                        </thead>
-                            <tr>
-                                <td ><input type="date" name="date0" id = 'date0' ></td>
-                                <td><input type="text" name="fees0" id = 'fees0' ></td>
-                                <td><input type="text" name="travel0" id = 'travel0'></td>
-                                <td><input type="text" name="food0" id = 'food0' ></td>
+            </div>
 
-                                <td><input type="button" class="button btn btn-primary" value="Add another line" onclick="addField();"></td>
-                                <td><input type="text" name="copy_no" id="copy" value="1" size="5"></td>
-                            </tr>
-                    </table>
+            <br>
 
-                </div>
-
-                <br>
-
-                <div class="container-contact1-form-btn container-fluid">
-                    <button class="contact1-form-btn">
+            <div class="container-contact1-form-btn container-fluid">
+                <button class="contact1-form-btn">
 						<span>
 							Send Invoice
 							<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
 						</span>
-					</button>
-                </div>
-                    <input type = 'hidden' name="count" id="rowcount" value = 1>
-            </form>
-        </div>
+                </button>
+            </div>
+            <input type='hidden' name="count" id="rowcount" value=1>
+
+        </form>
     </div>
-
-
-
-
+</div>
 
 
 {% endblock %}

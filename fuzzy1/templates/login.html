@@ -1,10 +1,53 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+
+{% extends "base.html" %}
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Login page</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+
 </head>
 <body>
-$END$
+
+{% block content %}
+ <img src="{% static './images/genesis.png' %}" class="img-fluid rounded mx-auto d-block " alt="Genesis"
+                     width="150" height="150" style="margin:5%;">
+<div class="container-fluid ">
+    <div style="width:50%;" class="contact2 container-fluid">
+        <form action="login" method="post" class="contact1-form">
+            {% csrf_token %}
+            <br>
+            <div class="input-group mb-3">
+                <div class="input-group-append">
+                    	<span class="input-group-text"><i class="fas fa-user"></i></span>
+                </div>
+                <input type="text" class="form-control input_user" placeholder="username" name="username" required>
+            </div>
+            <div class="input-group mb-2">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                </div>
+                <input type="password" class="form-control input_pass" placeholder="password" name="password" required>
+            </div>
+
+            <center>
+                <input type="submit" class="btn btn-warning">
+            </center>
+            <br><br>
+
+            <center><h2>{{Invalid}}</h2></center>
+
+
+
+        </form>
+    </div>
+</div>
+{% endblock %}
+
 </body>
 </html>
