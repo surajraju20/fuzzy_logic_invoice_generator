@@ -9,8 +9,6 @@ from datetime import datetime, timedelta
 from invoice.models import College, Trainer, hr_users
 
 
-
-
 def home(request):
     return render(request, "login.html")
 
@@ -67,7 +65,7 @@ def generate(request):
 
         email_generator(trainer_name, remuneration, college_name, acc_no,
                         ifsc, pan, phone, email, location,
-                        start_date, end_date, data_table, mode, timings)
+                        start_date, end_date, data_table, mode, no_days, timings)
 
         return render(request, "invoice.html")
 
@@ -78,7 +76,7 @@ def generate(request):
 
 def email_generator(trainer_name, remuneration, college_name, acc_no,
                     ifsc, pan, phone, email, location, start_date,
-                    end_date, data_table, mode, timings):
+                    end_date, data_table, mode, no_days, timings):
     # set up the SMTP server
     s = SMTP(host='smtp.gmail.com', port=587)
     s.starttls()
@@ -94,7 +92,9 @@ def email_generator(trainer_name, remuneration, college_name, acc_no,
                                                         "Remuneration\t\t   :" + remuneration + "/- per day incl of TDS\n" \
                                                                                                 "Timings\t\t\t\t:" + timings + "\n" \
                                                                                                                                "Mode of training\t    :" + mode + " training\n" \
-                                                                                                                                                                  "Date\t\t\t\t  :" + start_date + " to " + end_date
+                                                                                                                                                                  "Date\t\t\t\t  :" + start_date + " to " + end_date + "\n" \
+                                                                                                                                                                                                                       "No. of Days:\t\t\t:" + str(
+        no_days + 1)
 
     pdf_generator(trainer_name, acc_no,
                   ifsc, pan, phone, email, location, data_table)
@@ -111,8 +111,6 @@ def email_generator(trainer_name, remuneration, college_name, acc_no,
 
     s.send_message(msg)
     del msg
-
-
 
 
 def pdf_generator(name1, dbacno, dbifsc, dbpan, dbphno, dbemail, dbloc, data_table):
